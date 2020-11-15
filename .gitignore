@@ -10,6 +10,7 @@ npm-debug.*
 web-build/
 node_modules/
 Backend/node_modules/
+Backend/config/development.json
 
 
 # macOS
