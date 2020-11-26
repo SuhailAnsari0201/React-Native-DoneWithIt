@@ -11,6 +11,7 @@ web-build/
 node_modules/
 Backend/node_modules/
 Backend/config/development.json
+Backend/functions/
 
 
 # macOS

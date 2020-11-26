@@ -1,33 +1,40 @@
-import React from "react";
-import NetInfo, { useNetInfo } from "@react-native-community/netinfo";
-import { Button, AsyncStorage } from "react-native";
-import ListingScreen from "./app/screens/ListingsScreen";
-import AppNavigator from "./app/navigation/AppNavigator";
+import React, { useState } from "react";
+import { AppLoading } from "expo";
 import { NavigationContainer } from "@react-navigation/native";
+
 import navigationTheme from "./app/navigation/navigationTheme";
 import OfflineNotice from "./app/components/OfflineNotice";
 import AuthNavigator from "./app/navigation/AuthNavigator";
+import AppNavigator from "./app/navigation/AppNavigator";
+import AuthContext from "./app/auth/context";
+import authStorage from "./app/auth/storage";
+import { navigationRef } from "./app/navigation/rootNavigation";
 
 export default function App() {
-  const demo = async () => {
-    try {
-      await AsyncStorage.setItem("person", JSON.stringify({ id: 1 }));
-      const value = await AsyncStorage.getItem("person");
-      const person = JSON.parse(value);
-    } catch (error) {
-      console.log(error);
-    }
+  const [user, setUser] = useState();
+  const [isReady, setIsReady] = useState(false);
+
+  const restoreUser = async () => {
+    const user = await authStorage.getUser();
+    if (user) setUser(user);
   };
 
-  demo();
+  if (!isReady)
+    return (
+      <AppLoading startAsync={restoreUser} onFinish={() => setIsReady(true)} />
+    );
+
   return (
-    <>
+    <AuthContext.Provider value={{ user, setUser }}>
       <OfflineNotice />
-      <NavigationContainer theme={navigationTheme}>
-        <AuthNavigator />
+      <NavigationContainer ref={navigationRef} theme={navigationTheme}>
+        {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
-    </>
+    </AuthContext.Provider>
   );
 }
 
-//authentication 6-->jwtDecode(done)
+//notification done
+
+// now setting  navigationbar showing after clicking on textfield -bug
+// after clicking in contect form screen size is increase and decrease

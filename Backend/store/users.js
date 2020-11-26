@@ -17,6 +17,12 @@ const users = [
     email: "suhail@domain.com",
     password: "123456",
   },
+  {
+    id: 4,
+    name: "Demo",
+    email: "demo@domain.com",
+    password: "123456",
+  },
 ];
 
 const getUsers = () => users;

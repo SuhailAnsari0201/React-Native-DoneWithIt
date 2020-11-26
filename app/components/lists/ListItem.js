@@ -43,10 +43,10 @@ function ListItem({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    padding: 20,
-    backgroundColor: colors.white,
     alignItems: "center",
+    flexDirection: "row",
+    padding: 15,
+    backgroundColor: colors.white,
   },
   detailsContainer: {
     flex: 1,

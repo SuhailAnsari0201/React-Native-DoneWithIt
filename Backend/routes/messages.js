@@ -17,7 +17,6 @@ const schema = {
 
 router.get("/", auth, (req, res) => {
   const messages = messagesStore.getMessagesForUser(req.user.userId);
-
   const mapUser = (userId) => {
     const user = usersStore.getUserById(userId);
     return { id: user.id, name: user.name };

@@ -1,24 +1,25 @@
 import React from "react";
-import { StyleSheet, ActivityIndicator as Loading } from "react-native";
+import { StyleSheet, ActivityIndicator as Loading, View } from "react-native";
 
 function ActivityIndicator({ visible = false }) {
   if (!visible) return null;
 
   return (
-    <Loading
-      style={styles.container}
-      animating={true}
-      size={60}
-      color="tomato"
-    />
+    <View style={styles.overlay}>
+      <Loading animating={true} size={60} color="tomato" />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
+  overlay: {
+    position: "absolute",
     justifyContent: "center",
+    backgroundColor: "white",
+    opacity: 0.8,
+    height: "100%",
+    width: "100%",
+    zIndex: 1,
   },
 });
 

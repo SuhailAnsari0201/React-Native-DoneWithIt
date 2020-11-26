@@ -4,10 +4,10 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from "../config/colors";
 
-function ViewImageScreen() {
+function ViewImageScreen({ route, navigation }) {
   return (
     <View style={styles.container}>
-      <View style={styles.closeIcon}>
+      {/* <View style={styles.closeIcon} onTouchMove={() => navigation.goBack()}>
         <MaterialCommunityIcons name="close" color="white" size={25} />
       </View>
       <View style={styles.deleteIcon}>
@@ -16,11 +16,11 @@ function ViewImageScreen() {
           color="white"
           size={25}
         />
-      </View>
+      </View> */}
       <Image
         resizeMode="contain"
         style={styles.image}
-        source={require("../assets/chair.jpg")}
+        source={{ uri: route.params.images[0].url }}
       />
     </View>
   );
@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.black,
     flex: 1,
+
     //top: 30,
   },
   image: {
